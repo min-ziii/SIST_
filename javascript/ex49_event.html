@@ -61,7 +61,7 @@
                 console.log(event.shiftKey);
                 console.log(event.altKey);
 
-                if(event.buttons == 1) {
+                if(event.buttons == 1 && event.shiftKey) {
                     reomveImage();
                     const img = document.createElement('img');
                     img.setAttribute('src', 'images/rect_icon01.png');
