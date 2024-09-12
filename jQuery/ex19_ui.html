@@ -148,13 +148,46 @@
 
      <script>
         $('#price').slider({
-            range: true //범위! => 가격 범위
-        });
+            range: true, //범위! => 가격 범위
+            min: 10000,
+            max: 100000,
+            values: [30000, 70000],
+            step: 1000,
+            slide: function (event,ui) {
+                // document.title = ui.value[0] +','+ui.values[1];
+                $('#search span span:nth-child(1)').text(ui.values[0].toLocaleString());
+                $('#search span span:nth-child(2)').text(ui.values[1].toLocaleString());
 
-        $('.item > div:last-child').each((index, item)=> {
+                showItem(ui.values[0], ui.values[1]);
+
+                }
+            });
+            
+            function showItem(minPrice, maxPrice) {
+            $('#list .item').each((index, item) => {
+
+                //console.log($(item).children().last().text().replace(/,/g, ''));
+
+                let price = parseInt($(item).children().last().text().replace(/,/g, ''));
+
+                if (price >= minPrice
+                    && price <= maxPrice) {
+                    $(item).show();
+                } else {
+                    $(item).hide();
+                }
+
+            });
+        }
+
+        $('.item > div:last-child').each((index, item) => {
 
             $(item).text(parseInt($(item).text()).toLocaleString());
+
         });
-     </script>
+
+        showItem(30000, 70000);
+
+    </script>
 </body>
 </html>
